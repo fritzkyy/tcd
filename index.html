@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Tricky Tactics Deck Calculator</title>
+<style></style>
+</head>
+<body>
+  <form id="form">
+    <label for="tc">Total Cards Number</label>
+    <input type="number" id="tc" name="tc"><br/>
+    <label for="dc">Deck Cards Number</label>
+    <input type="number" id="dc" name="dc"><br/>
+    <label for="su">Starting Units Number</label>
+    <input type="number" id="su" name="su"><br/>
+    <input type="submit" id="s" value="Calculate" onclick="calculate(tc, dc, su, n)"><br/>
+    <output id="n" name="n" for="tc dc su"></output>
+  </form>
+
+  <script>
+      function calculate() {
+          const form = document.getElementById("form")
+          const submit = document.getElementById("s")
+          const formData = new FormData(form, submit)
+
+          form.addEventListener("submit", function (e) {
+              e.preventDefault()
+          })
+
+          var n = formData.get("tc")
+          var k = formData.get("dc")
+          var s = formData.get("su")
+          var t = document.getElementById("n")
+
+          function fact(n) {
+              var result = n;
+              if (n === 0 || n === 1)
+              return 1;
+              while (n > 1) {
+                  n--;
+                  result *= n;
+              }
+              return result;
+          }
+
+          t.innerHTML = (fact(n) / (fact(k) * fact(n - k)) * fact(k) / (fact(s) * fact(k - s)))
+      }
+  </script>
+</body>
+</html>
